@@ -1,6 +1,6 @@
-.PHONY: build conio
+.PHONY: build clean conio run wordcount
 
-DOCKER_NETWORK = docker-hadoop_default
+DOCKER_NETWORK = conio-nano_hadoop
 ENV_FILE = hadoop.env
 current_branch := $(shell git rev-parse --abbrev-ref HEAD)
 
@@ -19,6 +19,12 @@ clean:
 
 conio:
 	docker build -t conio/base:$(current_branch) ./conio
+
+run: build
+	docker-compose up -d --force-recreate
+
+stop:
+	docker-compose down
 
 wordcount:
 	docker build -t hadoop-wordcount ./submit
