@@ -70,7 +70,7 @@ services:
     env_file:
       - ./hadoop.env
     ports:
-      - 19888:19888
+      - 8188:8188
 
 volumes:
   hadoop_namenode:
